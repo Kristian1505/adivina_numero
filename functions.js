@@ -1,22 +1,3 @@
-
-let userName;
-let range;
-let userNumber;
-let result;
-let min;
-let max;
-let isCorrect;
-let counter;
-let isBigger;
-let randomNumber;
-
-userName = formatName(askName);
-
-
-//let min = range[0];
-//let max = range[1];
-
-
 const askName = () => prompt("¡Hola! Mi nombre es Kr9000. ¿Cuál es tu nombre?");
 
 const formatName = (unformatedName) => {
@@ -38,11 +19,13 @@ const askRange = () => {
     return arrayNum;
 }
 
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min ) + 1)  
+const chooseRandom = (min, max) => Math.floor(Math.random() * (max - min ) + 1)
 
-const giveInstruction = (val1, val2) => alert(`Piensa en un número del${val1} al ${val2}. Una vez que lo hayas hecho, yo trataré de adivinarlo. Te daré un número y tú me dirás si es menor o mayor.`)
+const giveInstructions = (val1, val2) => alert(`Piensa en un número del ${val1} al ${val2}. \nUna vez que lo hayas hecho, yo trataré de adivinarlo. \nTe daré un número y tú me dirás si es menor o mayor. \nPresiona enter una vez estés listo.`)
 
-const binarySearch = (min, max, getRandomNumber() ) => {
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min ) + 1);
+
+const binarySearch = (min, max, getRandomNumber) => {
 
     let isCorrect;
     let isBigger;
@@ -51,12 +34,12 @@ const binarySearch = (min, max, getRandomNumber() ) => {
 
     while (keepPlaying) {
         randomNumber = getRandomNumber(min, max)
-        isCorrect = prompt(`Teclea 1 si el resultado es correcto, de lo contrario presiona 2:\n ::: Tu número es ${randomNumber}`)
+        isCorrect = prompt(`Instrucciones: ----- Teclea 1 si el resultado es correcto \n----- Teclea 2 si el resultado es incorrecto \n::::: Tu número es:  ${randomNumber} ::::: \n min = ${min} max ${max} =`)
+        parseInt(isCorrect)
         if (isCorrect !== 1) {            
             isBigger = prompt(`Teclea 1 si tu número es mayor que ${randomNumber}, de lo contrario teclea 2:`)
             if (isBigger === 1){
                 min = randomNumber + 1
-                counter++
             } else {
                 max = randomNumber - 1
                 counter++
@@ -75,3 +58,35 @@ const binarySearch = (min, max, getRandomNumber() ) => {
     return [randomNumber, counter]
 }
 
+let userName;
+let range;
+let min;
+let max;
+let randomNumber;
+let finishedLoop;
+let finalNumber;
+let finalCounter;
+
+userName = formatName(askName());
+console.log("Nombre de usuario: " + userName)
+
+range = askRange();
+console.log("Rango: " + range)
+
+min = range[0];
+console.log("Valor mínimo: " + min)
+
+max = range[1];
+console.log("Valor máximo: " + max)
+
+giveInstructions(min, max);
+console.log("Instructions executed")
+
+finishedLoop = binarySearch(min, max, getRandomNumber);
+console.log(`Loop ended. Result: ${finishedLoop}`)
+
+finalNumber = finishedLoop[0]
+console.log(`Final number: ${finalNumber}`)
+
+finalCounter = finishedLoop[1]
+console.log(`Final counter: ${finalCounter}`)
